@@ -1,0 +1,34 @@
+@font-face {
+  font-family: Geist;
+  src: url('/fonts/geist-latin.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Figtree;
+  src: url('/fonts/figtree-latin.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/plus-jakarta-sans-latin.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+:root {
+  --font-portfolio: Geist, sans-serif;
+  --color-heading: #494949;
+  --color-navigation: #878787;
+  --color-project-detail: #989ca2;
+  --portfolio-width: 882px;
+  --portfolio-top: clamp(56px, 11.02vh, 119px);
+  --navigation-duration: 520ms;
+  --navigation-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

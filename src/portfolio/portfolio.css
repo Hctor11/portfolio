@@ -1,0 +1,179 @@
+.portfolio {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  isolation: isolate;
+  overflow: hidden;
+  scrollbar-width: none;
+  font-family: var(--font-portfolio);
+  -webkit-font-smoothing: antialiased;
+}
+
+.portfolio::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: #fff;
+  opacity: 0;
+}
+
+.portfolio:not([data-view='home']) { overflow-y: auto; }
+.portfolio:not([data-view='home'])::before { opacity: 0.7; }
+
+.portfolio-layout {
+  width: min(var(--portfolio-width), calc(100% - 96px));
+  margin-inline: auto;
+  padding-block: var(--portfolio-top) 48px;
+}
+
+.portfolio-header { position: relative; height: 73px; }
+.portfolio button { font: inherit; border: 0; padding: 0; background: none; }
+.portfolio button:enabled { cursor: pointer; }
+.portfolio button:focus-visible, .social-list a:focus-visible { outline: 2px solid var(--color-heading); outline-offset: 6px; border-radius: 2px; }
+
+.identity {
+  position: absolute;
+  top: 4px;
+  left: 14px;
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-heading);
+  pointer-events: none;
+}
+
+.navigation-heading {
+  position: absolute;
+  left: 14px;
+  top: 0;
+  transform: translateY(var(--navigation-start));
+  color: var(--color-navigation);
+  font-size: 24px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.selected-heading { --navigation-start: 80px; }
+.social-heading { --navigation-start: 112px; }
+.navigation-button { display: block; color: inherit; }
+.portfolio[data-view='work'] .selected-heading,
+.portfolio[data-view='social'] .social-heading { transform: translateY(0); color: var(--color-heading); }
+.portfolio:not([data-view='home']) .identity { opacity: 0; transform: translateY(-18px); }
+
+.portfolio[data-view='work'] .social-heading,
+.portfolio[data-view='social'] .selected-heading {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(calc(var(--navigation-start) - 12px));
+}
+
+.back-button {
+  position: absolute;
+  left: -39px;
+  top: -6px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 2;
+  color: var(--color-heading);
+}
+
+.back-icon { width: 24px; height: 24px; background: currentColor; mask: url('/projects/arrow-left.svg') center / 24px 24px no-repeat; }
+.portfolio:not([data-view='home']) .back-button { opacity: 1; visibility: visible; }
+.portfolio-panels { position: relative; }
+.portfolio-panel { position: absolute; top: 0; width: 100%; visibility: hidden; }
+.portfolio[data-view='work'] .projects,
+.portfolio[data-view='social'] .social-view { position: relative; visibility: visible; }
+.portfolio[data-view='social'] .projects { height: 0; overflow: hidden; }
+.project-list { display: grid; gap: 26px; list-style: none; margin: 0; padding: 0; }
+.social-list { display: grid; gap: 16px; list-style: none; margin: 0; padding: 0 14px; }
+.social-list a { display: inline-block; color: var(--color-navigation); font-size: 24px; line-height: 1.3; text-decoration: none; }
+.project-list > li, .social-list > li { opacity: 0; transform: translateY(12px); }
+.portfolio[data-view='work'] .project-list > li,
+.portfolio[data-view='social'] .social-list > li { opacity: 1; transform: translateY(0); }
+.portfolio .navigation-button:hover, .portfolio .back-button:hover, .social-list a:hover { color: #000; }
+
+.project-card {
+  display: block;
+  position: relative;
+  height: 201px;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #fafafa;
+  color: inherit;
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.project-card:focus-visible { outline: 2px solid var(--color-heading); outline-offset: 4px; }
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(360px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgb(255 255 255 / 65%), rgb(255 255 255 / 0%) 70%);
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+.project-card:focus-visible::after { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover::after { opacity: 1; }
+}
+
+.project-card--alexandria { background: #f0f0f0; }
+.project-copy { position: absolute; z-index: 2; top: 40.11px; left: 52.28px; }
+.project-copy h2 {
+  margin: 0;
+  color: #000;
+  font-size: 43.269px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -2.5961px;
+}
+
+.project-copy p {
+  margin: 6.4px 0 0;
+  color: var(--color-project-detail);
+  font-size: 21.634px;
+  line-height: 0.993;
+}
+
+.project-card--manifold h2 { font-family: 'Plus Jakarta Sans', sans-serif; }
+.project-card--manifold .project-copy p { font-family: Figtree, sans-serif; }
+
+/* Preview coordinates retain the Figma crop while the card adapts to the available width. */
+.project-preview { position: absolute; top: 0; left: 0; width: 100%; aspect-ratio: 882 / 201; pointer-events: none; }
+.preview-detail { position: absolute; width: 71.08254%; height: 181.85672%; left: -30.559%; top: 99.78607%; overflow: hidden; }
+.preview-detail img { position: absolute; width: 138.03%; height: 123.18%; top: -23.18%; left: 0; }
+.preview-manifold { position: absolute; width: 84.16463%; height: 215.26816%; left: 38.07029%; top: 18.38806%; overflow: hidden; }
+.preview-manifold img { position: absolute; width: 116.58%; height: 121.15%; top: -21.15%; left: -16.58%; }
+.preview-import { position: absolute; left: 32.788%; top: 0; width: 31.98503%; height: 69.5806%; }
+.preview-editor { position: absolute; left: 65.64626%; top: 15.9204%; width: 32.37279%; height: 84.0796%; }
+
+@media (max-width: 1000px) {
+  .project-copy { left: 36px; }
+  .project-copy h2 { font-size: 36px; letter-spacing: -2px; }
+  .project-copy p { font-size: 19px; }
+}
+
+@media (max-width: 600px) {
+  .portfolio-layout { width: calc(100% - 48px); }
+  .portfolio[data-view='work'] .selected-heading,
+  .portfolio[data-view='social'] .social-heading { transform: translate(28px, 0); }
+  .back-button { left: 4px; }
+  .social-list { padding-left: 42px; }
+  .project-card { height: 278px; }
+  .project-copy { left: 24px; top: 22px; }
+  .project-copy h2 { font-size: 32px; letter-spacing: -1.92px; }
+  .project-copy p { font-size: 18px; margin-top: 9px; line-height: 1.1; }
+  .project-preview { width: 620px; left: -230px; top: 136px; }
+}

@@ -1,0 +1,35 @@
+/* Each navigation item keeps its DOM node while moving into the active heading. */
+.navigation-heading {
+  transition: transform var(--navigation-duration) var(--navigation-ease), opacity 160ms ease, visibility 0s 160ms;
+}
+
+.navigation-button, .social-list a { transition: color 200ms ease-out; }
+.portfolio[data-view='home'] .navigation-heading { transition-delay: 0ms, 180ms, 0ms; }
+
+.identity {
+  transition: opacity 220ms ease 160ms, transform 420ms var(--navigation-ease) 160ms;
+}
+
+.portfolio:not([data-view='home']) .identity { transition-delay: 0ms; }
+.portfolio::before { transition: opacity 420ms ease; }
+.back-button { transition: color 200ms ease-out, opacity 180ms ease, visibility 0s 180ms; }
+.portfolio:not([data-view='home']) .back-button { transition-delay: 0ms, 180ms, 0ms; }
+.portfolio-panel { transition: visibility 0s 260ms; }
+.portfolio[data-view='work'] .projects,
+.portfolio[data-view='social'] .social-view { transition-delay: 0ms; }
+.project-list > li, .social-list > li { transition: opacity 180ms ease, transform 260ms var(--navigation-ease); }
+.portfolio[data-view='work'] .project-list > li,
+.portfolio[data-view='social'] .social-list > li {
+  transition-duration: 320ms, 420ms;
+  transition-delay: 180ms;
+}
+
+.portfolio[data-view='work'] .project-list > li:nth-child(2),
+.portfolio[data-view='social'] .social-list > li:nth-child(2) { transition-delay: 250ms; }
+.portfolio[data-view='social'] .social-list > li:nth-child(3) { transition-delay: 320ms; }
+.portfolio[data-view='social'] .social-list > li:nth-child(4) { transition-delay: 390ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio *, .portfolio::before { transition: none !important; }
+  .project-card::after { --spotlight-x: 50%; --spotlight-y: 50%; transition: none; }
+}

@@ -1,0 +1,24 @@
+:root {
+  color-scheme: light;
+  background: #fff;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  touch-action: pan-y;
+}
+
+.background canvas {
+  display: block;
+}
